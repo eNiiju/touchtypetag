@@ -1,2 +1,15 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
+<script lang="ts">
+  import { invoke } from "@tauri-apps/api/core";
+
+  let name = $state("");
+  let greetMsg = $state("");
+
+  async function greet(event: Event) {
+    event.preventDefault();
+    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
+    greetMsg = await invoke("greet", { name });
+  }
+</script>
+
+
+test
