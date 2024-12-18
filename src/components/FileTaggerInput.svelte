@@ -5,7 +5,7 @@
           }
         | {
               changed: true;
-              newImageName: string;
+              newFileNameWithoutExtension: string;
           };
 </script>
 
@@ -14,7 +14,7 @@
     import { Input } from '../lib/components/ui/input';
 
     type Props = {
-        imageName: string;
+        fileNameWithoutExtension: string;
         onTag: (event: TagEvent) => void;
     };
 
@@ -23,7 +23,7 @@
     let inputValue = $state<string>('');
 
     $effect.pre(() => {
-        const _ = props.imageName; // Detect changes in imageName prop
+        const _ = props.fileNameWithoutExtension; // Detect changes in fileNameWithoutExtension prop
         inputValue = '';
     });
 
@@ -34,11 +34,11 @@
             props.onTag({ changed: false });
             return;
         }
-        props.onTag({ changed: true, newImageName: inputValue });
+        props.onTag({ changed: true, newFileNameWithoutExtension: inputValue });
     }
 </script>
 
 <form onsubmit={handleFormSubmit}>
-    <Input type="text" placeholder={props.imageName} bind:value={inputValue} class="max-w-xs" />
+    <Input type="text" placeholder={props.fileNameWithoutExtension} bind:value={inputValue} class="max-w-xs" />
     <Button type="submit">Rename</Button>
 </form>
