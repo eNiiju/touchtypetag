@@ -1,6 +1,7 @@
 <script lang="ts">
     import { open } from '@tauri-apps/plugin-dialog';
     import { readDir, rename } from '@tauri-apps/plugin-fs';
+    import FolderSearchIcon from 'lucide-svelte/icons/folder-search';
     import { Button } from '@/lib/components/ui/button';
     import FileViewer from '@/components/FileViewer.svelte';
     import FileTaggerInput, { type TagEvent } from '@/components/FileTaggerInput.svelte';
@@ -112,17 +113,37 @@
     }
 </script>
 
-{#if taggingState === 'waiting'}
-    <Button onclick={selectDirectory}>Select directory</Button>
-    <p>Select a directory to start tagging files.</p>
-{:else if taggingState === 'tagging'}
-    <p>Tagging file {currentFileIndex + 1} of {filesToTag.length}</p>
+<div class="mt-16 mx-auto flex flex-col gap-8 w-fit p-4">
+    {#if taggingState === 'waiting'}
+        <p class="text-xl text-center">Select a directory to start tagging files.</p>
 
-    <div>
-        <FileViewer file={filesToTag[currentFileIndex]} />
-        <FileTaggerInput fileNameWithoutExtension={filesToTag[currentFileIndex].nameWithoutExtension} onTag={handleTag} />
-    </div>
-{:else if taggingState === 'done'}
-    <Button onclick={selectDirectory}>Select another directory</Button>
-    <p>Tagging complete!</p>
-{/if}
+        <div class="flex justify-center">
+            <Button onclick={selectDirectory}>
+                <FolderSearchIcon class="mr-1 size-4" />
+                Select directory
+            </Button>
+        </div>
+    {:else if taggingState === 'tagging'}
+        <p class="text-xl text-center">Tagging file {currentFileIndex + 1} of {filesToTag.length}</p>
+
+        <div class="flex flex-col items-center gap-4">
+            <div class="h-[50vh] outline outline-offset-2">
+                <FileViewer file={filesToTag[currentFileIndex]} />
+            </div>
+
+            <FileTaggerInput
+                fileNameWithoutExtension={filesToTag[currentFileIndex].nameWithoutExtension}
+                onTag={handleTag}
+            />
+        </div>
+    {:else if taggingState === 'done'}
+        <p class="text-xl text-center">Tagging complete!</p>
+
+        <div class="flex justify-center">
+            <Button onclick={selectDirectory}>
+                <FolderSearchIcon class="mr-1 size-4" />
+                Select another directory
+            </Button>
+        </div>
+    {/if}
+</div>

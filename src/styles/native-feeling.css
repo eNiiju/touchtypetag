@@ -1,0 +1,17 @@
+/**
+ * This file is used to make the app feel more native-like.
+ * It disables some browser features that are not present in native apps.
+ */
+
+ * {
+    user-select: none;
+    user-drag: none;
+}
+
+img, svg, video {
+    pointer-events: none;
+}
+
+button, a {
+    cursor: default;
+}

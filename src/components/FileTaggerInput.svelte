@@ -38,7 +38,7 @@
     }
 </script>
 
-<form onsubmit={handleFormSubmit}>
+<form onsubmit={handleFormSubmit} class="flex gap-2">
     <Input type="text" placeholder={props.fileNameWithoutExtension} bind:value={inputValue} class="max-w-xs" />
     <Button type="submit">Rename</Button>
 </form>

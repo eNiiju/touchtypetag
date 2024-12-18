@@ -17,20 +17,20 @@
     }
 </script>
 
-<div>
+<div class="h-full">
     {#await fileSrc}
-        <p>Loading file</p>
+        <p>Loading file...</p>
     {:then src}
         {#if props.file.type === 'image'}
-            <img {src} alt="" />
+            <img {src} alt="" class="h-full" />
         {:else if props.file.type === 'video'}
-            <video {src}>
+            <video {src} class="h-full">
                 <track kind="captions" />
             </video>
         {:else}
-            <p>Unsupported file type</p>
+            <p>(Unsupported file type)</p>
         {/if}
     {:catch error}
-        <span>Oops! - {error}</span>
+        <p>Oops! - {error}</p>
     {/await}
 </div>
