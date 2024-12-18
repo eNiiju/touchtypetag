@@ -24,7 +24,7 @@
         {#if props.file.type === 'image'}
             <img {src} alt="" class="max-h-full" />
         {:else if props.file.type === 'video'}
-            <video {src} class="max-h-full">
+            <video {src} class="max-h-full" autoplay loop>
                 <track kind="captions" />
             </video>
         {:else}
