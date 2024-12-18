@@ -22,9 +22,9 @@
         <p>Loading file...</p>
     {:then src}
         {#if props.file.type === 'image'}
-            <img {src} alt="" class="h-full" />
+            <img {src} alt="" class="max-h-full" />
         {:else if props.file.type === 'video'}
-            <video {src} class="h-full">
+            <video {src} class="max-h-full">
                 <track kind="captions" />
             </video>
         {:else}
